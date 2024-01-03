@@ -1,0 +1,15 @@
+string encode(string src)
+{     
+  //Your code here 
+   string encoding = "";
+    int counting=0;
+    for (int n = 0; src[n]; n++)
+    {
+        counting = 1;
+        while (src[n] == src[n + 1]) {
+            counting++, n++;
+        }
+        encoding += src[n]+to_string(counting);
+    }
+    return encoding;
+}   
