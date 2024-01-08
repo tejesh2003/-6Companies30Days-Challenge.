@@ -1,0 +1,34 @@
+class Solution {
+public:
+    string getHint(string secret, string guess) {
+        int bulls=0;
+        int cows=0;
+        int length=secret.length();
+        for(int i=0;i<length;i++){
+            if(secret[i]==guess[i]){
+                bulls++;
+            }
+        }
+        map<int,int>secretmp;
+        map<int,int>guessmp;
+        for(int i=0;i<length;i++){
+            secretmp[secret[i]]++;
+        }
+        for(int i=0;i<length;i++){
+            guessmp[guess[i]]++;
+        }
+        for(auto i:secretmp){
+            if(guessmp.find(i.first)!=guessmp.end()){
+                cows+=min(i.second,guessmp[i.first]);
+            }
+        }
+        string bull=to_string(bulls);
+        string cow=to_string(cows-bulls);
+        string ans="";
+        ans.append(bull);
+        ans.append("A");
+        ans.append(cow);
+        ans.append("B");
+        return ans;
+    }
+};
