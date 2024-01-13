@@ -1,0 +1,23 @@
+class Solution {
+public:
+    bool check(int a,int b){
+        return!((b<=0.5*a+7) || b>a || (b>100 && a<100));
+    }
+    int numFriendRequests(vector<int>& ages) {
+        int ans=0;
+        int n=ages.size();
+        unordered_map<int,int>mp;
+        for(int &age:ages){
+            mp[age]++;
+        }
+        for(auto &a:mp){
+            for(auto &b:mp){
+                if(check(a.first,b.first)){
+                    ans+=a.second*(b.second-(a.first==b.first? 1:0));
+                }
+            }
+        }
+        
+        return ans;
+    }
+};
